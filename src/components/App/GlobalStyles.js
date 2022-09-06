@@ -134,7 +134,7 @@ const GlobalStyle = createGlobalStyle`
   /* My styles */
 
   body {
-    height: 100%;
+    height: 100vh;
     font-size: 20px;
     color: var(--white);
     font-weight: 400;
@@ -154,9 +154,19 @@ const GlobalStyle = createGlobalStyle`
     --red: #C70000;
   }
 
-  .root {
+  #root {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
