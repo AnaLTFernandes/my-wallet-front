@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postSignIn } from "../../service/service";
+import { postSignUp } from "../../service/service";
 
 import Render from "./Render";
 
 
-export default function SignIn () {
+export default function SignUp () {
     const [form, setForm] = useState({});
 
     const navigate = useNavigate();
@@ -13,8 +13,12 @@ export default function SignIn () {
     function handleForm (event) {
         event.preventDefault();
 
-        postSignIn(form);
-        navigate('/records');
+        if (form.password !== form.passwordConfirm) {
+            window.alert('Senhas diferentes.');
+        } else {
+            postSignUp(form);
+            navigate('/sign-in');
+        }
     };
 
     function updateForm ({ name, value }) {
@@ -27,6 +31,11 @@ export default function SignIn () {
             handleForm,
             inputs: [
                 {
+                    placeholder:"Nome",
+                    name:'name',
+                    type:'text'
+                },
+                {
                     placeholder:"E-mail",
                     name:'email',
                     type:'email'
@@ -35,12 +44,17 @@ export default function SignIn () {
                     placeholder:"Senha",
                     name:'password',
                     type:'password'
+                },
+                {
+                    placeholder:"Confirme a senha",
+                    name:'passwordConfirm',
+                    type:'password'
                 }
             ],
-            button: 'Entrar'
+            button: 'Cadastrar'
         },
-        span:'Primeira vez? Cadastre-se!',
-        linkRouter:'/sign-up'
+        span:'Já tem uma conta? Entre agora!',
+        linkRouter:'/sign-in'
     };
 
     return (
