@@ -163,10 +163,35 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
+    width: 90%;
+    max-width: 600px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  header {
+    width: 100%;
+    height: 78px;
+    margin: 10px 0 5px;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer {
+    width: 100%;
+    margin: 13px 0 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  svg {
+    cursor: pointer;
   }
 `;
 

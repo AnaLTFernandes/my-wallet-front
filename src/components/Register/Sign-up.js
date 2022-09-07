@@ -17,7 +17,7 @@ export default function SignUp () {
             window.alert('Senhas diferentes.');
         } else {
             postSignUp(form);
-            navigate('/sign-in');
+            navigate('/');
         }
     };
 
@@ -54,7 +54,7 @@ export default function SignUp () {
             button: 'Cadastrar'
         },
         span:'Já tem uma conta? Entre agora!',
-        linkRouter:'/sign-in'
+        linkRouter:'/'
     };
 
     return (

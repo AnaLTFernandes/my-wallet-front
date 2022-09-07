@@ -37,7 +37,6 @@ export default function Render ({ dataForm, span, linkRouter }) {
 
 const Wrapper = styled.main`
     width: 85%;
-    max-width: 600px;
 
     h1 {
         height: 60px;
