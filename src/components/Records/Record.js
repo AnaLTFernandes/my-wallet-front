@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export default function Record ({ date, details, price, type }) {
 
+    const newPrice = Number(price).toFixed(2).toString().replace('.', ',');
+
     return (
         <Wrapper type={type}>
             <div>
@@ -11,7 +13,7 @@ export default function Record ({ date, details, price, type }) {
                 </span>
             </div>
             <div>
-                <strong>{price.replace('.', ',')}</strong>
+                <strong>{newPrice}</strong>
             </div>
         </Wrapper>
     );

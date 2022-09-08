@@ -24,7 +24,7 @@ const allRecords = [
 ];
 
 function postSignIn (user) {
-    const userLogin = users.find(({ email }) => email === user.email);
+    const userLogin = users.find(({ email }) => email === 'eu@gmail.com');
     return userLogin;
 }
 
@@ -34,13 +34,21 @@ function postSignUp (user) {
 
 function getRecords (user) {
     const userRecords = allRecords
-        .find(({ email }) => email === user.email);
+        .find(({ email }) => email === 'eu@gmail.com');
 
     return userRecords.records;
+}
+
+function postRecord (user, record) {
+    const userRecords = allRecords
+        .find(({ email }) => email === 'eu@gmail.com');
+
+    userRecords.records.push({ ...record, email:'eu@gmail.com'});
 }
 
 export {
     postSignIn,
     postSignUp,
-    getRecords
+    getRecords,
+    postRecord
 }

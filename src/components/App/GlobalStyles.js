@@ -193,6 +193,10 @@ const GlobalStyle = createGlobalStyle`
   svg {
     cursor: pointer;
   }
+
+  a {
+    color: var(--white);
+  }
 `;
 
 export default GlobalStyle;

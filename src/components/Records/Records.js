@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BsBoxArrowRight } from 'react-icons/bs';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import UserContext from "../../contexts/UserContext";
 import { Button } from "../../common";
@@ -19,34 +20,38 @@ export default function Records () {
         setRecords(getRecords(userData));
     }, []);
 
-    let total = 0;
+    let balance = 0;
 
     records.forEach(({ price, type }) => {
         if (type === 'entrada') {
-            total += Number(price);
+            balance += Number(price);
         } else {
-            total -= Number(price);
+            balance -= Number(price);
         }
     });
 
     function convertTotal (to) {
         if (to === 'string') {
-            total = total
+            balance = balance
                 .toFixed(2)
                 .toString()
                 .replace('.', ',')
                 .replace('-', '');
-        } else if (typeof number === 'string') {
-            total = total.replace('.', ',');
-            total = Number(total);
+        } else {
+            balance = Number(balance);
         }
         
-        return total;
+        return balance;
     }
 
     return (
         <main>
-            <header>Olá, {userData.name} <BsBoxArrowRight /> </header>
+            <header>
+                Olá, {userData.name}
+                <Link to='/'>
+                    <BsBoxArrowRight />
+                </Link>
+            </header>
 
             <Page>
                 { records.length === 0
@@ -59,7 +64,7 @@ export default function Records () {
                             </div>
                             
                             <span>
-                                <b>Total</b>
+                                <b>SALDO</b>
                                 <span>R$ {convertTotal('string')}</span>
                             </span>
                         </Wrapper>
@@ -67,19 +72,25 @@ export default function Records () {
             </Page>
 
             <footer>
+                
                 <Button>
-                    <div>
-                        <AiOutlinePlusCircle />
-                        <span>Nova entrada</span>
-                    </div>
+                    <Link to='/add-income'>
+                        <div>
+                            <AiOutlinePlusCircle />
+                            <span>Nova entrada</span>
+                        </div>
+                    </Link>
                 </Button>
-
+                
                 <Button>
-                    <div>
-                        <AiOutlineMinusCircle />
-                        <span>Nova saída</span>
-                    </div>
+                    <Link to='/add-expense'>
+                        <div>
+                            <AiOutlineMinusCircle />
+                            <span>Nova saída</span>
+                        </div>
+                    </Link>
                 </Button>
+                
             </footer>
             
         </main>

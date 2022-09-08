@@ -20,6 +20,10 @@ const Wrapper = styled.button`
     color: var(--white);
     cursor: pointer;
 
+    a {
+        color: var(--white);
+    }
+
     ${ props => props.Large
         ?
             `{

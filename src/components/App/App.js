@@ -3,9 +3,10 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import UserContext from '../../contexts/UserContext';
-import SignIn from '../Register/Sign-in';
-import SignUp from '../Register/Sign-up';
+import { SignIn, SignUp } from '../Register/';
 import Records from '../Records/Records';
+import { AddIncome, AddExpense } from '../CreateRecord';
+
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -21,6 +22,8 @@ function App() {
           <Route path='/' element={ <SignIn /> } />
           <Route path='/sign-up' element={ <SignUp /> } />
           <Route path='/records' element={ <Records /> } />
+          <Route path='/add-income' element={ <AddIncome /> } />
+          <Route path='/add-expense' element={ <AddExpense /> } />
 
         </Routes>
 
