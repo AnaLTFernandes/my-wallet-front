@@ -37,8 +37,6 @@ export default function Records () {
                 .toString()
                 .replace('.', ',')
                 .replace('-', '');
-        } else {
-            balance = Number(balance);
         }
         
         return balance;
@@ -56,7 +54,7 @@ export default function Records () {
             <Page>
                 { records.length === 0
                     ?   <span>Não há registros de entrada ou saída</span>
-                    :   <Wrapper total={convertTotal('number')}>
+                    :   <Wrapper total={balance}>
                             <div>
                                 {records.map((record, index) => (
                                     <Record key={index} {...record} />
@@ -65,7 +63,7 @@ export default function Records () {
                             
                             <span>
                                 <b>SALDO</b>
-                                <span>R$ {convertTotal('string')}</span>
+                                <span>{convertTotal('string')}</span>
                             </span>
                         </Wrapper>
                 }

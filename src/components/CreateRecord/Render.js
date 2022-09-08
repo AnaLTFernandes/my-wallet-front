@@ -11,7 +11,7 @@ export default function Render ({ title, dataForm }) {
 
             <form onSubmit={ dataForm.handleForm }>
 
-                {dataForm.inputs.map(({ placeholder, name, type }, index) => (
+                {dataForm.inputs.map(({ placeholder, name, type, initial }, index) => (
                     <Input
                         key={index}
                         required
@@ -19,6 +19,7 @@ export default function Render ({ title, dataForm }) {
                         placeholder={placeholder}
                         name={name}
                         type={type}
+                        defaultValue={initial}
                         onChange={(e) => 
                             dataForm.updateForm({ name:e.target.name, value:e.target.value })
                         }
@@ -41,12 +42,14 @@ export default function Render ({ title, dataForm }) {
 
 const Wrapper = styled.main`
     width: 85%;
+    justify-content: start;
 
     form {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 12px;
     }
 
     a {
