@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { BsBoxArrowRight } from 'react-icons/bs';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import UserContext from "../../contexts/UserContext";
@@ -18,7 +18,7 @@ export default function Records () {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const promise = getRecords();
 
         promise.then(({ data }) => {

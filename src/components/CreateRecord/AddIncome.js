@@ -6,7 +6,7 @@ import { postRecord } from "../../service/service";
 import Render from "./Render";
 
 
-export default function AddIncome () {
+export default function AddIncome ({ setMessage }) {
     const [form, setForm] = useState({
         type:'entrada'
     });
@@ -22,12 +22,26 @@ export default function AddIncome () {
 
         if (isNaN(form.price)) {
 
-            window.alert('Preço inválido');
+            setMessage({
+                type:'alert',
+                message: {
+                    text:'Preço inválido',
+                    type:'error'
+                }
+            });
         } else {
 
             const promise = postRecord(form);
 
-            promise.catch(res => window.alert(res.response.data.message));
+            promise.catch(res => {
+                setMessage({
+                    type:'alert',
+                    message: {
+                        text:res.response.data.message,
+                        type:'error'
+                    }
+                });
+            });
 
             promise.then(() => {
                 navigate('/records');

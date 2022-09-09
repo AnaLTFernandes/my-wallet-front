@@ -2,12 +2,12 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { postSignIn } from "../../service/service";
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/";
 
 import Render from "./Render";
 
 
-export default function SignIn () {
+export default function SignIn ({ setMessage }) {
     const [form, setForm] = useState({});
     const { setUserData } = useContext(UserContext);
 
@@ -18,7 +18,15 @@ export default function SignIn () {
 
         const promise = postSignIn(form);
 
-        promise.catch(res => window.alert(res.response.data.message));
+        promise.catch(res => {
+            setMessage({
+                type:'alert',
+                message: {
+                    text:res.response.data.message,
+                    type:'error'
+                }
+            });
+        });
 
         promise.then(({ data }) => {
             localStorage.setItem('mywallet', JSON.stringify({token:data.token}));

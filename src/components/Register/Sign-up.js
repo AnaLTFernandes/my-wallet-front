@@ -5,7 +5,7 @@ import { postSignUp } from "../../service/service";
 import Render from "./Render";
 
 
-export default function SignUp () {
+export default function SignUp ({ setMessage }) {
     const [form, setForm] = useState({});
 
     const navigate = useNavigate();
@@ -14,11 +14,32 @@ export default function SignUp () {
         event.preventDefault();
 
         if (form.password !== form.passwordConfirm) {
-            window.alert('Senhas diferentes.');
+            setMessage({
+                type:'alert',
+                message: {
+                    text:'As senhas devem ser iguais.',
+                    type:'error'
+                }
+            });
         } else {
             const promise = postSignUp(form);
-            promise.catch(res => window.alert(res.response.data.message));
-            promise.then(() => {
+            promise.catch(res => {
+                setMessage({
+                    type:'alert',
+                    message: {
+                        text:res.response.data.message,
+                        type:'error'
+                    }
+                });
+            });
+            promise.then(res => {
+                setMessage({
+                    type:'alert',
+                    message: {
+                        text:res.data.message,
+                        type:'success'
+                    }
+                });
                 navigate('/');
             });
         }

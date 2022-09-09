@@ -24,6 +24,10 @@ const Wrapper = styled.button`
         color: var(--white);
     }
 
+    &:hover {
+        filter: brightness(1.04);
+    }
+
     ${ props => props.Large
         ?
             `{
