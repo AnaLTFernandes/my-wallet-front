@@ -21,7 +21,7 @@ export default function SignIn () {
         promise.catch(res => window.alert(res.response.data.message));
 
         promise.then(({ data }) => {
-            localStorage.setItem('mywallet', JSON.stringify(data.token));
+            localStorage.setItem('mywallet', JSON.stringify({token:data.token}));
             setUserData(data);
             navigate('/records');
         });

@@ -1,21 +1,23 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../../contexts/UserContext";
 
 
 export default function PrivateRoute ({ children }) {
-    const { userData } = useContext(UserContext);
+    
+    const token = JSON.parse(localStorage.getItem('mywallet'));
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!userData.token) {
+        if (!token) {
             navigate('/');
             return;
         }
     }, []);
 
-    return (
-        <>{ children }</>
-    );
+    if (token) {
+        return (
+            <>{ children }</>
+        );
+    }
 }

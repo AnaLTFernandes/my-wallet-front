@@ -11,7 +11,10 @@ import PrivateRoute from './PrivateRoute';
 
 function App() {
   const [userData, setUserData] = useState({});
-  
+
+  if (!userData.token) {
+    localStorage.removeItem('mywallet');
+  }
 
   return (
     <BrowserRouter>

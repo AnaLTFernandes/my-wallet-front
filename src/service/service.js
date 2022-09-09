@@ -4,11 +4,11 @@ const BASE_URI = 'http://localhost:5000';
 
 
 function createHeaders () {
-    const token = JSON.parse(localStorage.getItem('mywallet'));
+    const auth = JSON.parse(localStorage.getItem('mywallet'));
 
     const config = {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${auth.token}`
         }
     }
 
