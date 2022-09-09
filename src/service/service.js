@@ -1,49 +1,44 @@
-const users = [{ email:'eu@gmail.com', name:'bubba' }];
-const allRecords = [
-    {
-        email:'eu@gmail.com',
-        records:[
-            {
-                date:'06/09/2022',
-                details:'vendi um negócio',
-                price:'13.00',
-                type:'entrada'
-            },
-            {
-                date:'07/09/2022',
-                details:'compra lá',
-                price:'7.00',
-                type:'saída'
-            }
-        ]
-    },
-    {
-        email:'outroemail@gmail.com',
-        records:[]
+import axios from "axios";
+
+const BASE_URI = 'http://localhost:5000';
+
+
+function createHeaders () {
+    const token = JSON.parse(localStorage.getItem('mywallet'));
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     }
-];
 
-function postSignIn (user) {
-    const userLogin = users.find(({ email }) => email === 'eu@gmail.com');
-    return userLogin;
+    return config;
 }
 
-function postSignUp (user) {
-    users.push(user);
+function postSignUp (body) {
+    const promise = axios.post(`${BASE_URI}/sign-up`, body);
+    return promise;
 }
 
-function getRecords (user) {
-    const userRecords = allRecords
-        .find(({ email }) => email === 'eu@gmail.com');
-
-    return userRecords.records;
+function postSignIn (body) {
+    const promise = axios.post(`${BASE_URI}/sign-in`, body);
+    return promise;
 }
 
-function postRecord (user, record) {
-    const userRecords = allRecords
-        .find(({ email }) => email === 'eu@gmail.com');
+function getRecords () {
+    const config = createHeaders();
 
-    userRecords.records.push({ ...record, email:'eu@gmail.com'});
+    const promise = axios.get(`${BASE_URI}/records`, config);
+
+    return promise;
+}
+
+function postRecord (body) {
+    const config = createHeaders();
+
+    const promise = axios.post(`${BASE_URI}/record`, body, config);
+
+    return promise;
 }
 
 export {

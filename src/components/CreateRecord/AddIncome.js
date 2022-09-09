@@ -1,16 +1,13 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { postRecord } from "../../service/service";
-import UserContext from "../../contexts/UserContext";
 
 import Render from "./Render";
 
 
 export default function AddIncome () {
-    const { userData } = useContext(UserContext);
     const [form, setForm] = useState({
-        date: new Date().toLocaleDateString('pt-br'),
         type:'entrada'
     });
 
@@ -28,9 +25,13 @@ export default function AddIncome () {
             window.alert('Preço inválido');
         } else {
 
-            postRecord(userData, form);
+            const promise = postRecord(form);
 
-            navigate('/records');
+            promise.catch(res => window.alert(res.response.data.message));
+
+            promise.then(() => {
+                navigate('/records');
+            });
         }
     };
 

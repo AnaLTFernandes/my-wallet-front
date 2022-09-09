@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BsBoxArrowRight } from 'react-icons/bs';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import UserContext from "../../contexts/UserContext";
 import { Button } from "../../common";
@@ -14,10 +14,16 @@ import Record from "./Record";
 
 export default function Records () {
     const [records, setRecords] = useState([]);
-    const { userData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setRecords(getRecords(userData));
+        const promise = getRecords();
+
+        promise.then(({ data }) => {
+            setRecords(data);
+        });
     }, []);
 
     let balance = 0;
@@ -42,13 +48,16 @@ export default function Records () {
         return balance;
     }
 
+    function left() {
+        setUserData({});
+        navigate('/');
+    }
+
     return (
         <main>
             <header>
                 Olá, {userData.name}
-                <Link to='/'>
-                    <BsBoxArrowRight />
-                </Link>
+                <BsBoxArrowRight onClick={left} />
             </header>
 
             <Page>

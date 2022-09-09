@@ -6,10 +6,12 @@ import UserContext from '../../contexts/UserContext';
 import { SignIn, SignUp } from '../Register/';
 import Records from '../Records/Records';
 import { AddIncome, AddExpense } from '../CreateRecord';
+import PrivateRoute from './PrivateRoute';
 
 
 function App() {
   const [userData, setUserData] = useState({});
+  
 
   return (
     <BrowserRouter>
@@ -21,9 +23,24 @@ function App() {
 
           <Route path='/' element={ <SignIn /> } />
           <Route path='/sign-up' element={ <SignUp /> } />
-          <Route path='/records' element={ <Records /> } />
-          <Route path='/add-income' element={ <AddIncome /> } />
-          <Route path='/add-expense' element={ <AddExpense /> } />
+
+          <Route path='/records' element={
+            <PrivateRoute>
+              <Records />
+            </PrivateRoute>
+          } />
+
+          <Route path='/add-income' element={
+            <PrivateRoute>
+              <AddIncome />
+            </PrivateRoute>
+          } />
+          
+          <Route path='/add-expense' element={
+            <PrivateRoute>
+              <AddExpense />
+            </PrivateRoute>
+          } />
 
         </Routes>
 

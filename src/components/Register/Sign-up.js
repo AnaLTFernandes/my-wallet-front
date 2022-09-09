@@ -16,8 +16,11 @@ export default function SignUp () {
         if (form.password !== form.passwordConfirm) {
             window.alert('Senhas diferentes.');
         } else {
-            postSignUp(form);
-            navigate('/');
+            const promise = postSignUp(form);
+            promise.catch(res => window.alert(res.response.data.message));
+            promise.then(() => {
+                navigate('/');
+            });
         }
     };
 

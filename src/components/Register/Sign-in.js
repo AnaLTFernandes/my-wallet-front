@@ -16,11 +16,15 @@ export default function SignIn () {
     function handleForm (event) {
         event.preventDefault();
 
-        const user = postSignIn(form);
+        const promise = postSignIn(form);
 
-        setUserData(user);
+        promise.catch(res => window.alert(res.response.data.message));
 
-        navigate('/records');
+        promise.then(({ data }) => {
+            localStorage.setItem('mywallet', JSON.stringify(data.token));
+            setUserData(data);
+            navigate('/records');
+        });
     };
 
     function updateForm ({ name, value }) {
