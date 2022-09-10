@@ -19,6 +19,7 @@ export default function SignIn ({ setMessage }) {
         const promise = postSignIn(form);
 
         promise.catch(res => {
+
             setMessage({
                 type:'alert',
                 message: {
@@ -29,8 +30,11 @@ export default function SignIn ({ setMessage }) {
         });
 
         promise.then(({ data }) => {
-            localStorage.setItem('mywallet', JSON.stringify({token:data.token}));
+
+            localStorage.setItem('mywallet', JSON.stringify({ token:data.token }));
+
             setUserData(data);
+
             navigate('/records');
         });
     };

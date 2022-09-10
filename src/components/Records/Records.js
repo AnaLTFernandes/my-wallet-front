@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-import { BsBoxArrowRight } from 'react-icons/bs';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { useContext, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import UserContext from "../../contexts/UserContext";
+import { More, Minus, Left } from "../../common/Icons";
 import { Button } from "../../common";
 import { getRecords } from "../../service/service";
+import UserContext from "../../contexts/UserContext";
 
 import Record from "./Record";
 
@@ -37,15 +36,17 @@ export default function Records () {
     });
 
     function convertTotal (to) {
+        let balanceString = '';
+
         if (to === 'string') {
-            balance = balance
+            balanceString = balance
                 .toFixed(2)
                 .toString()
                 .replace('.', ',')
                 .replace('-', '');
         }
         
-        return balance;
+        return balanceString;
     }
 
     function left() {
@@ -57,7 +58,7 @@ export default function Records () {
         <main>
             <header>
                 Olá, {userData.name}
-                <BsBoxArrowRight onClick={left} />
+                <Left onClick={left} />
             </header>
 
             <Page>
@@ -83,7 +84,7 @@ export default function Records () {
                 <Button>
                     <Link to='/add-income'>
                         <div>
-                            <AiOutlinePlusCircle />
+                            <More />
                             <span>Nova entrada</span>
                         </div>
                     </Link>
@@ -92,7 +93,7 @@ export default function Records () {
                 <Button>
                     <Link to='/add-expense'>
                         <div>
-                            <AiOutlineMinusCircle />
+                            <Minus />
                             <span>Nova saída</span>
                         </div>
                     </Link>

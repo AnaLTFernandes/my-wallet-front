@@ -3,12 +3,13 @@ import styled from "styled-components";
 export default function Record ({ date, details, price, type }) {
 
     const newPrice = Number(price).toFixed(2).toString().replace('.', ',');
+    const newDate = date.slice(0, 5);
 
     return (
         <Wrapper type={type}>
             <div>
                 <span>
-                    <b>{date.slice(0, 5)}</b>
+                    <b>{newDate}</b>
                     {details}
                 </span>
             </div>

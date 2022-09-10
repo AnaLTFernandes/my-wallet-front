@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 function Button ({ children, Large = false, ...otherProps }) {
     return (
-        <Wrapper Large={Large} { ...otherProps } >{children}</Wrapper>
+        <Wrapper Large={Large} { ...otherProps }>{children}</Wrapper>
     );
 }
 

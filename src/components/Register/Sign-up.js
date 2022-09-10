@@ -14,6 +14,7 @@ export default function SignUp ({ setMessage }) {
         event.preventDefault();
 
         if (form.password !== form.passwordConfirm) {
+
             setMessage({
                 type:'alert',
                 message: {
@@ -21,8 +22,10 @@ export default function SignUp ({ setMessage }) {
                     type:'error'
                 }
             });
+
         } else {
             const promise = postSignUp(form);
+
             promise.catch(res => {
                 setMessage({
                     type:'alert',
@@ -32,6 +35,7 @@ export default function SignUp ({ setMessage }) {
                     }
                 });
             });
+
             promise.then(res => {
                 setMessage({
                     type:'alert',
@@ -40,6 +44,7 @@ export default function SignUp ({ setMessage }) {
                         type:'success'
                     }
                 });
+                
                 navigate('/');
             });
         }

@@ -4,11 +4,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { UserContext } from '../../contexts/';
 import { SignIn, SignUp } from '../Register/';
-import Records from '../Records/Records';
 import { AddIncome, AddExpense } from '../CreateRecord';
-import PrivateRoute from './PrivateRoute';
+import Records from '../Records/Records';
 
 import { Alert, Confirm } from '../Messages/';
+import PrivateRoute from './PrivateRoute';
 
 
 function App() {
@@ -25,13 +25,24 @@ function App() {
         
         <GlobalStyle />
 
-        {message.type === 'alert' ? <Alert message={message} setMessage={setMessage} /> : ''}
-        {message.type === 'confirm' ? <Confirm message={message} setMessage={setMessage} /> : ''}
+        {message.type === 'alert'
+          ? <Alert message={ message } setMessage={ setMessage } />
+          : ''
+        }
+        {message.type === 'confirm'
+          ? <Confirm message={ message } setMessage={ setMessage } />
+          : ''
+        }
 
         <Routes>
 
-          <Route path='/' element={ <SignIn setMessage={setMessage} /> } />
-          <Route path='/sign-up' element={ <SignUp setMessage={setMessage} /> } />
+          <Route path='/' element={
+            <SignIn setMessage={ setMessage } />
+          } />
+
+          <Route path='/sign-up' element={
+            <SignUp setMessage={ setMessage } />
+          } />
 
           <Route path='/records' element={
             <PrivateRoute>
@@ -41,13 +52,13 @@ function App() {
 
           <Route path='/add-income' element={
             <PrivateRoute>
-              <AddIncome setMessage={setMessage} />
+              <AddIncome setMessage={ setMessage } />
             </PrivateRoute>
           } />
           
           <Route path='/add-expense' element={
             <PrivateRoute>
-              <AddExpense setMessage={setMessage} />
+              <AddExpense setMessage={ setMessage } />
             </PrivateRoute>
           } />
 

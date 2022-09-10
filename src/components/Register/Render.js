@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Input, Button } from "../../common";
 
+
 export default function Render ({ dataForm, span, linkRouter }) {
 
     return (
@@ -24,7 +25,7 @@ export default function Render ({ dataForm, span, linkRouter }) {
                     ></Input>
                 ))}
 
-                <Button Large={true} >{dataForm.button}</Button>
+                <Button Large={true}>{dataForm.button}</Button>
             </form>
 
             <Link to={linkRouter}>

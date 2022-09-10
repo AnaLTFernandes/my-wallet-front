@@ -25,7 +25,7 @@ export default function AddIncome ({ setMessage }) {
             setMessage({
                 type:'alert',
                 message: {
-                    text:'Preço inválido',
+                    text:`Preço inválido. Por favor, verifique se está no formato: x.y`,
                     type:'error'
                 }
             });

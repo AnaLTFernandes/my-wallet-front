@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Input, Button } from "../../common";
 
+
 export default function Render ({ title, dataForm }) {
 
     return (
