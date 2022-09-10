@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/';
 import { SignIn, SignUp } from '../Register/';
 import { AddIncome, AddExpense } from '../CreateRecord';
 import Records from '../Records/Records';
+import Edit from '../EditRecord/Edit';
 
 import { Alert, Confirm } from '../Messages/';
 import PrivateRoute from './PrivateRoute';
@@ -59,6 +60,12 @@ function App() {
           <Route path='/add-expense' element={
             <PrivateRoute>
               <AddExpense setMessage={ setMessage } />
+            </PrivateRoute>
+          } />
+          
+          <Route path='/record/edit/:idRecord' element={
+            <PrivateRoute>
+              <Edit setMessage={ setMessage } />
             </PrivateRoute>
           } />
 

@@ -41,9 +41,18 @@ function postRecord (body) {
     return promise;
 }
 
+function editRecord (body, id) {
+    const config = createHeaders();
+
+    const promise = axios.put(`${BASE_URI}/record/${id}`, body, config);
+
+    return promise;
+}
+
 export {
     postSignIn,
     postSignUp,
     getRecords,
-    postRecord
+    postRecord,
+    editRecord
 }

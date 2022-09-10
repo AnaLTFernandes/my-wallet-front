@@ -32,7 +32,8 @@ export default function Alert ({ message, setMessage }) {
 }
 
 const Wrapper = styled.div`
-    width: 70%;
+    width: fit-content;
+    max-width: 70%;
     max-width: 500px;
     background-color: ${props => props.type === 'success' ? '#8FC549' : 'lightcoral'};
     position: fixed;

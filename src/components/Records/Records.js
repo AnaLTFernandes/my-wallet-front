@@ -56,10 +56,10 @@ export default function Records () {
 
     return (
         <main>
-            <header>
-                Olá, {userData.name}
+            <Headder>
+                <div>Olá, {userData.name}</div>
                 <Left onClick={left} />
-            </header>
+            </Headder>
 
             <Page>
                 { records.length === 0
@@ -105,12 +105,25 @@ export default function Records () {
     );
 }
 
+const Headder = styled.header`
+    div {
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+`;
+
 const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    a {
+        cursor: default;
+    }
 
     & > div {
         height: 100%;
@@ -145,7 +158,6 @@ const Wrapper = styled.div`
             }
         }
     }
-
 `;
 
 const Page = styled.div`
