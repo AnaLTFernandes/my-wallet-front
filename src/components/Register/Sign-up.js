@@ -13,12 +13,12 @@ export default function SignUp ({ setMessage }) {
     function handleForm (event) {
         event.preventDefault();
 
-        if (form.password !== form.passwordConfirm) {
+        if ((form.password !== form.passwordConfirm) || (form.password.length < 4)) {
 
             setMessage({
                 type:'alert',
                 message: {
-                    text:'As senhas devem ser iguais.',
+                    text:'As senhas devem ser iguais e possuir mais de 4 dígitos.',
                     type:'error'
                 }
             });

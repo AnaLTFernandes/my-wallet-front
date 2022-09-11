@@ -47,7 +47,7 @@ function App() {
 
           <Route path='/records' element={
             <PrivateRoute>
-              <Records  />
+              <Records  message={ message } setMessage={ setMessage } />
             </PrivateRoute>
           } />
 

@@ -11,7 +11,7 @@ import UserContext from "../../contexts/UserContext";
 import Record from "./Record";
 
 
-export default function Records () {
+export default function Records ({ setMessage }) {
     const [records, setRecords] = useState([]);
     const { userData, setUserData } = useContext(UserContext);
 
@@ -23,7 +23,7 @@ export default function Records () {
         promise.then(({ data }) => {
             setRecords(data);
         });
-    }, []);
+    }, [userData]);
 
     let balance = 0;
 
@@ -65,9 +65,16 @@ export default function Records () {
                 { records.length === 0
                     ?   <span>Não há registros de entrada ou saída</span>
                     :   <Wrapper total={balance}>
+
                             <div>
                                 {records.map((record, index) => (
-                                    <Record key={index} {...record} />
+                                    <Record
+                                        key={index}
+                                        { ...record }
+                                        setMessage={setMessage}
+                                        userData={userData}
+                                        setUserData={setUserData}
+                                    />
                                 ))}
                             </div>
                             
@@ -75,6 +82,7 @@ export default function Records () {
                                 <b>SALDO</b>
                                 <span>{convertTotal('string')}</span>
                             </span>
+
                         </Wrapper>
                 }
             </Page>
@@ -151,9 +159,14 @@ const Wrapper = styled.div`
             span {
                 width: fit-content;
                 color: ${props => 
-                    props.total >= 0
+                    props.total > 0
                     ? 'var(--green)'
                     : 'var(--red)'
+                };
+                color: ${props => 
+                    props.total === 0
+                    ? 'black'
+                    : ''
                 };
             }
         }

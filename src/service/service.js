@@ -49,10 +49,19 @@ function editRecord (body, id) {
     return promise;
 }
 
+function deleteRecord (id) {
+    const config = createHeaders();
+
+    const promise = axios.delete(`${BASE_URI}/records/${id}`, config);
+
+    return promise;
+}
+
 export {
     postSignIn,
     postSignUp,
     getRecords,
     postRecord,
-    editRecord
+    editRecord,
+    deleteRecord
 }
