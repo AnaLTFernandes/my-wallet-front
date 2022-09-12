@@ -7,6 +7,23 @@ export default function Alert ({ message, setMessage }) {
     const [opacity, setOpacity] = useState(0);
     const { text, type } = message.message;
 
+    let color = 'var(--black)';
+
+    switch (type) {
+        case 'error':
+            color = 'lightcoral';
+            break;
+        case 'success':
+            color = '#8FC549';
+            break;
+        case 'warning':
+            color = 'rgb(219, 177, 26)';
+            break;
+    
+        default:
+            break;
+    }
+
     useEffect(() => {
         setTimeout(() => {
             setOpacity(1);
@@ -25,7 +42,7 @@ export default function Alert ({ message, setMessage }) {
     return (
         <Wrapper
             opacity={opacity}
-            type={type}>
+            color={color}>
                 {text}
         </Wrapper>
     );
@@ -35,7 +52,7 @@ const Wrapper = styled.div`
     width: fit-content;
     max-width: 70%;
     max-width: 500px;
-    background-color: ${props => props.type === 'success' ? '#8FC549' : 'lightcoral'};
+    background-color: ${props => props.color};
     position: fixed;
     top: 10px;
     opacity: ${props => props.opacity};

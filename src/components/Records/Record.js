@@ -87,6 +87,7 @@ const Wrapper = styled.div`
 
     && {
         span {
+            width: 100%;
             color: var(--black);
 
             b {
@@ -97,7 +98,7 @@ const Wrapper = styled.div`
     }
 
     a {
-        width: 100%;
+        width: 70%;
     }
 
     strong {
@@ -112,7 +113,7 @@ const Wrapper = styled.div`
 `;
 
 const Info = styled.div`
-    width: 80%;
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

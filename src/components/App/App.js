@@ -10,6 +10,7 @@ import Edit from '../EditRecord/Edit';
 
 import { Alert, Confirm } from '../Messages/';
 import PrivateRoute from './PrivateRoute';
+import Logout from '../Logout/Logout';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   const [message, setMessage] = useState({});
 
   if (!userData.token) {
-    localStorage.removeItem('mywallet');
+    Logout({ setMessage });
   }
 
   return (

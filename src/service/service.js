@@ -60,7 +60,7 @@ function deleteRecord (id) {
 function postLogout () {
     const config = createHeaders();
 
-    const promise = axios.post(`${BASE_URI}/records/logout`, {}, config);
+    const promise = axios.post(`${BASE_URI}/logout`, {}, config);
 
     return promise;
 }
