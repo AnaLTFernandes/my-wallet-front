@@ -5,15 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { More, Minus, Left } from "../../common/Icons";
 import { Button } from "../../common";
+import { convertTotal } from "./ConvertTotal";
 import { getRecords } from "../../service/service";
 import UserContext from "../../contexts/UserContext";
 
 import Record from "./Record";
+import filterRecords from "./FilterRecords";
 
 
 export default function Records ({ setMessage }) {
     const [records, setRecords] = useState([]);
+    const [dateFilter, setDateFilter] = useState({});
     const { userData, setUserData } = useContext(UserContext);
+
+    let recordsFiltered;
 
     const navigate = useNavigate();
 
@@ -35,19 +40,12 @@ export default function Records ({ setMessage }) {
         }
     });
 
-    function convertTotal (to) {
-        let balanceString = '';
-
-        if (to === 'string') {
-            balanceString = balance
-                .toFixed(2)
-                .toString()
-                .replace('.', ',')
-                .replace('-', '');
-        }
-        
-        return balanceString;
+    if (dateFilter.date) {
+        recordsFiltered = records.filter(({ date }) => filterRecords(dateFilter.date, date))
     }
+
+    const recordsData = recordsFiltered ? recordsFiltered : records;
+
 
     function left() {
         setUserData({});
@@ -66,21 +64,26 @@ export default function Records ({ setMessage }) {
                     ?   <span>Não há registros de entrada ou saída</span>
                     :   <Wrapper total={balance}>
 
+                            <input
+                                type='date'
+                                onChange={(e) => setDateFilter({ date:e.target.value })}
+                            />
+
                             <div>
-                                {records.map((record, index) => (
-                                    <Record
-                                        key={index}
-                                        { ...record }
-                                        setMessage={setMessage}
-                                        userData={userData}
-                                        setUserData={setUserData}
-                                    />
+                                {recordsData.map((record, index) => (
+                                        <Record
+                                            key={index}
+                                            { ...record }
+                                            setMessage={setMessage}
+                                            userData={userData}
+                                            setUserData={setUserData}
+                                        />
                                 ))}
                             </div>
                             
                             <span>
                                 <b>SALDO</b>
-                                <span>{convertTotal('string')}</span>
+                                <span>{convertTotal(balance, 'string')}</span>
                             </span>
 
                         </Wrapper>
@@ -181,6 +184,7 @@ const Page = styled.div`
     padding: 14px 11px;
     background-color: var(--white);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -188,5 +192,15 @@ const Page = styled.div`
         color: var(--gray);
         width: 200px;
         text-align: center;
+    }
+
+    input {
+        width: 100px;
+        align-self: flex-end;
+        border: 1px solid #c6c6c6;
+        border-radius: 3px;
+        font-size: 12px;
+        color: #a2a2a2;
+        margin-bottom: 5px;
     }
 `;
