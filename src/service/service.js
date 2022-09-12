@@ -16,12 +16,12 @@ function createHeaders () {
 }
 
 function postSignUp (body) {
-    const promise = axios.post(`${BASE_URI}/sign-up`, body);
+    const promise = axios.post(`${BASE_URI}/signup`, body);
     return promise;
 }
 
 function postSignIn (body) {
-    const promise = axios.post(`${BASE_URI}/sign-in`, body);
+    const promise = axios.post(`${BASE_URI}/signin`, body);
     return promise;
 }
 
@@ -44,7 +44,7 @@ function postRecord (body) {
 function editRecord (body, id) {
     const config = createHeaders();
 
-    const promise = axios.put(`${BASE_URI}/record/${id}`, body, config);
+    const promise = axios.put(`${BASE_URI}/record/edit/${id}`, body, config);
 
     return promise;
 }
@@ -52,7 +52,15 @@ function editRecord (body, id) {
 function deleteRecord (id) {
     const config = createHeaders();
 
-    const promise = axios.delete(`${BASE_URI}/records/${id}`, config);
+    const promise = axios.delete(`${BASE_URI}/records/delete/${id}`, config);
+
+    return promise;
+}
+
+function postLogout () {
+    const config = createHeaders();
+
+    const promise = axios.post(`${BASE_URI}/records/logout`, {}, config);
 
     return promise;
 }
@@ -63,5 +71,6 @@ export {
     getRecords,
     postRecord,
     editRecord,
-    deleteRecord
+    deleteRecord,
+    postLogout
 }
