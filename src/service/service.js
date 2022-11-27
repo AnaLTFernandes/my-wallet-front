@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URI = 'https://my-wallet.herokuapp.com/';
+const BASE_URI = 'https://my-wallet.herokuapp.com';
 
 
 function createHeaders () {
